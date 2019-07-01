@@ -3,6 +3,6 @@ import PawnMovement from '../movement/PawnMovement';
 
 export default class Pawn extends Piece {
     constructor(player) {
-        super(player, [PawnMovement(player)] );
+        super(player, [PawnMovement(player,1)] );
     }
 }
