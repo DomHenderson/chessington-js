@@ -13,11 +13,11 @@ export default class Rook extends Piece {
 
         //Rooks can move to any square with one matching coordinate
         for ( let i = 0; i < 8; ++i ) {
-            if ( i != square.row ) {
+            if ( i !== square.row ) {
                 moves.push(new Square ( i, square.col ) );
             }
 
-            if ( i != square.col ) {
+            if ( i !== square.col ) {
                 moves.push ( new Square ( square.row, i ) );
             }
         }
