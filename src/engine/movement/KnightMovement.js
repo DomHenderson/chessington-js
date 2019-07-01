@@ -1,17 +1,6 @@
-export default function () {
-    return square => {
-        let moves = [];
-        moves.push(square.createWithOffset(1,2));
-        moves.push(square.createWithOffset(2,1));
-        moves.push(square.createWithOffset(1,-2));
-        moves.push(square.createWithOffset(2,-1));
-        moves.push(square.createWithOffset(-1,2));
-        moves.push(square.createWithOffset(-2,1));
-        moves.push(square.createWithOffset(-1,-2));
-        moves.push(square.createWithOffset(-2,-1));
+import Movement from "./Movement";
 
-        moves = moves.filter ( square => square.row >= 0 && square.row < 8 && square.col >= 0 && square.col < 8 );
-
-        return moves;
-    }
+export default function (player, limit) {
+    limit = limit || 8;
+    return Movement(player, [{x:2,y:1},{x:2,y:-1},{x:1,y:-2},{x:-1,y:-2},{x:-2,y:-1},{x:-2,y:1},{x:-1,y:2},{x:1,y:2}],limit);
 }
