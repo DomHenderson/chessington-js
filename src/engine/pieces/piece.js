@@ -7,9 +7,7 @@ export default class Piece {
     getAvailableMoves(board) {
         let moves = [];
         let square = board.findPiece(this);
-        for ( let movement of this.movementTypes ) {
-            moves = moves.concat ( movement(square,board) );
-        }
+        this.movementTypes.forEach(movement => moves = moves.concat(movement(square, board)));
         return moves;
     }
 

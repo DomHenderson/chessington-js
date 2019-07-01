@@ -1,4 +1,5 @@
 import King from '../pieces/king';
+import GameSettings from '../gameSettings';
 
 const CANT_TAKE = 0;
 const CAN_TAKE = 1;
@@ -10,28 +11,40 @@ export {
     MUST_TAKE,
 }
 
-export default function ( player, directions, limit, taking = CAN_TAKE  ) {
-    limit = limit || 8;
-    let canTake = (taking === CAN_TAKE || taking === MUST_TAKE );
-    let mustTake = (taking === MUST_TAKE);
+export default function ( player, directions, limit = 8, taking = CAN_TAKE  ) {
     return (square,board) => {
         let moves = [];
-        for (let direction of directions) {
-            for (let i = 1; i <= limit; ++i) {
-                let newSquare = square.createWithOffset(i * direction.y, i * direction.x);
-                if ( newSquare.row < 0 || newSquare.row > 7 || newSquare.col < 0 || newSquare.col > 7  ) {
-                    break;
-                }
-                if ( board.getPiece(newSquare) ) {
-                    if ( canTake && board.getPiece(newSquare).player !== player && !(board.getPiece(newSquare) instanceof King ) ) {
-                        moves.push(newSquare);
-                    }
-                    break;
-                }
-                if(mustTake) break;
+        directions.forEach(direction => moves = moves.concat(moveInDirection(player, board, square, direction, limit, taking)));
+        return moves;
+    }
+};
+
+function moveInDirection ( player, board, square, direction, limit, taking ) {
+    let canTake = (taking === CAN_TAKE || taking === MUST_TAKE );
+    let mustTake = (taking === MUST_TAKE);
+    let moves = [];
+    for (let i = 1; i <= limit; ++i) {
+        //Note that createWithOffset takes row then column, hence y then x
+        let newSquare = square.createWithOffset(i * direction.y, i * direction.x);
+
+        if ( outOfBounds ( newSquare) ) {
+            break;
+        }
+
+        if ( board.getPiece(newSquare) ) {
+            if ( canTake && board.getPiece(newSquare).player !== player && !(board.getPiece(newSquare) instanceof King ) ) {
                 moves.push(newSquare);
             }
+            break;
         }
-        return moves;
-    };
-};
+
+        if(mustTake) break;
+
+        moves.push(newSquare);
+    }
+    return moves;
+}
+
+function outOfBounds ( square ) {
+    return square.row < 0 || square.row >= GameSettings.BOARD_SIZE || square.col < 0 || square.col >= GameSettings.BOARD_SIZE;
+}

@@ -1,5 +1,6 @@
 import Player from '../player';
 import { default as Movement, CANT_TAKE, MUST_TAKE } from "./Movement";
+import GameSettings from "../gameSettings";
 
 // export default function ( player ) {
 //     if ( player === Player.WHITE ) {
@@ -39,10 +40,10 @@ export default function (player, limit) {
         startRow = 1;
     } else if ( player === Player.BLACK ) {
         direction = -1;
-        startRow = 6;
+        startRow = GameSettings.BOARD_SIZE-2;
     } else {
         direction = 0;
-        startRow = -1;
+        startRow = undefined;
     }
 
     return (square,board) => {
