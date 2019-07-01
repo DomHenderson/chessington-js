@@ -4,6 +4,6 @@ import LateralMovement from '../movement/LateralMovement';
 
 export default class King extends Piece {
     constructor(player) {
-        super(player,[LateralMovement(1),DiagonalMovement(1)]);
+        super(player,[LateralMovement(player, 1),DiagonalMovement(player,1)]);
     }
 }

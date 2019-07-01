@@ -4,6 +4,6 @@ import DiagonalMovement from '../movement/DiagonalMovement';
 
 export default class Queen extends Piece {
     constructor(player) {
-        super(player, [LateralMovement(), DiagonalMovement()]);
+        super(player, [LateralMovement(player), DiagonalMovement(player)]);
     }
 }

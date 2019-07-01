@@ -3,7 +3,7 @@ import LateralMovement from '../movement/LateralMovement';
 
 export default class Rook extends Piece {
     constructor(player) {
-        super(player,[LateralMovement()]);
+        super(player,[LateralMovement(player)]);
     }
 }
 
