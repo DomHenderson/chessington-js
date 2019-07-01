@@ -8,7 +8,7 @@ export default class Piece {
         let moves = [];
         let square = board.findPiece(this);
         for ( let movement of this.movementTypes ) {
-            moves = moves.concat ( movement(square) );
+            moves = moves.concat ( movement(square,board) );
         }
         return moves;
     }
