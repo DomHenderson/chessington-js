@@ -1,17 +1,9 @@
 import Piece from './piece';
-import Square from '../square';
-import Rook from './rook';
-import Bishop from './bishop';
+import getLateralMoves from '../movement/getLateralMoves';
+import getDiagonalMoves from '../movement/getDiagonalMoves';
 
 export default class Queen extends Piece {
     constructor(player) {
-        super(player);
-    }
-
-    getAvailableMoves(board) {
-        let square = board.findPiece(this);
-        let moves = Rook.getLateralMoves(square);
-        moves = Bishop.getDiagonalMoves(square,moves);
-        return moves;
+        super(player, [getLateralMoves, getDiagonalMoves]);
     }
 }

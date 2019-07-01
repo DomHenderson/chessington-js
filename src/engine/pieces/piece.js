@@ -1,10 +1,16 @@
 export default class Piece {
-    constructor(player) {
+    constructor(player, movementTypes) {
         this.player = player;
+        this.movementTypes = movementTypes;
     }
 
     getAvailableMoves(board) {
-        throw new Error('This method must be implemented, and return a list of available moves');
+        let moves = [];
+        let square = board.findPiece(this);
+        for ( let movement of this.movementTypes ) {
+            moves = moves.concat ( movement(square) );
+        }
+        return moves;
     }
 
     moveTo(board, newSquare) {
