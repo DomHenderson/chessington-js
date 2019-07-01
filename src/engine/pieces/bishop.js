@@ -8,7 +8,13 @@ export default class Bishop extends Piece {
     getAvailableMoves(board) {
         let square = board.findPiece(this);
 
-        let moves = [];
+        return Bishop.getDiagonalMoves( square );
+    }
+
+    static getDiagonalMoves ( square, moves ) {
+        if ( moves === undefined ) {
+            moves = [];
+        }
 
         for ( let i = 0; i < 8; ++i ) {
             let offset = i - square.row;
