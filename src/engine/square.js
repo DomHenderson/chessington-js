@@ -15,4 +15,8 @@ export default class Square {
     toString() {
         return `Row ${this.row}, Col ${this.col}`;
     }
+
+    createWithOffset(row,col) {
+        return new Square ( this.row + row, this.col + col );
+    }
 }
