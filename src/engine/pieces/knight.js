@@ -1,9 +1,9 @@
 import Piece from './piece';
-import getKnightMoves from '../movement/getKnightMoves';
+import KnightMovement from '../movement/KnightMovement';
 
 export default class Knight extends Piece {
     constructor(player) {
-        super(player, [getKnightMoves]);
+        super(player, [KnightMovement()]);
     }
 
 
